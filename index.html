@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="src/output.css" />
+    <link rel="shortcut icon" href="https://www.google.com/s2/favicons?domain=game.org" type="image/x-icon" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -13,33 +14,88 @@
       referrerpolicy="no-referrer"
     />
     <style>
+      :root {
+        --glow-bg: rgba(00, 255, 0, 0.495);
+      }
+      body {
+        background: white;
+        overflow: hidden;
+        padding: 0 40px;
+      }
+      nav {
+        padding: 10px 50px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.122);
+        display: flex !important;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .lifeSpan {
+        width: 20px !important;
+        height: 20px;
+      }
+      main {
+        display: flex;
+        justify-content: space-between;
+      }
+      aside {
+        width: 300px;
+        height: 100%;
+        border-left: 1px solid rgba(0, 0, 0, 0.122);
+      }
       .box {
         width: 100%;
         height: 100%;
         cursor: pointer;
         transition: transform 0.4s;
         font-size: 50px;
-        color: white;
         display: flex;
         justify-content: center;
         align-items: center;
-        color: #212121;
-        border: 1px solid rgba(33, 33, 33, 0.122);
+        background: white;
+        border: 1px solid rgba(0, 0, 0, 0.122);
+        position: relative;
+        transition: 0.3s;
+      }
+      .box::before {
+        content: attr(data-index);
+        font-size: 10px;
+        font-weight: 600;
+        position: absolute;
+        /* opacity: 0; */
+        top: 10px;
+        right: 10px;
+        color: #f1f1f1;
+        width: 25px;
+        height: 25px;
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #76206a;
+        border: 1px solid rgba(0, 0, 0, 0.122);
+      }
+      /* .box:hover::before {
+        opacity: 1;
+        transition: 0.3s;
+      } */
+      .box:active {
+        transform: scale(0.9);
       }
       img {
-        width: 90% !important;
-        height: 90% !important;
+        width: 70% !important;
+        height: 70% !important;
         object-fit: contain;
         aspect-ratio: 1/1;
       }
-
+      #box-container {
+        padding: 5px;
+      }
       .selected {
-        background: rgb(0, 44, 20);
-        border: 1px solid lightgreen;
+        background: rgb(190, 255, 190) !important;
+        border: 1px solid darkgreen;
       }
       .bom {
-        background: rgb(90, 20, 0);
-        border: 1px solid lightcoral;
+        background: rgb(255, 190, 190) !important;
       }
       .tag {
         color: #212121;
@@ -47,102 +103,139 @@
         position: absolute;
         font-size: 1.5rem;
       }
+
+      /* .orb-1 {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        transform: translate(-50%, 20%);
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        background: radial-gradient(var(--glow-bg) 0%, rgba(0, 0, 0, 0.008) 80%);
+        z-index: -1;
+      }
+      .orb-2 {
+        position: absolute;
+        right: 0;
+        top: 0;
+        transform: translate(50%, -20%);
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        background: radial-gradient(var(--glow-bg) 0%, rgba(0, 0, 0, 0.008) 80%);
+        z-index: -1;
+      } */
     </style>
   </head>
-  <body class="w-dvw h-dvh flex justify-center items-center font-sans select-none">
-    <div id="box-container" class="w-[80%] h-[80%] grid grid-cols-6 grid-rows-5 gap-1.5 *:bg-slate-900">
-      <div class="box" data-index="1">
-        <!-- <span class="tag"></span> -->
-        <img src="asstes/logo.png" alt="logo.png" />
+  <body class="w-dvw h-dvh flex pb-5 font-sans select-none flex-col">
+    <!-- <div class="orb-1"></div> -->
+    <!-- <div class="orb-2"></div> -->
+    <nav class="w-full bg-white mb-10">
+      <div class="logo">Lorem</div>
+      <div class="heart-container flex gap-3 items-center">
+        <span id="lifeUpdater">3</span>
+        <i class="fa-solid fa-grip-lines-vertical"></i>
+        <img class="lifeSpan" src="asstes/px heart.png" alt="" />
+        <img class="lifeSpan" src="asstes/px heart.png" alt="" />
+        <img class="lifeSpan" src="asstes/px heart.png" alt="" />
       </div>
-      <div class="box" data-index="2">
-        <img src="asstes/logo.png" alt="logo.png" />
+    </nav>
+    <main>
+      <div id="box-container" class="w-full h-full grid grid-cols-6 grid-rows-5 gap-1.5 mr-2">
+        <div class="box" data-index="1">
+          <img class="img-box" src="asstes/gift.png" alt="" />
+        </div>
+        <div class="box" data-index="2">
+          <img class="img-box" src="asstes/gift.png" alt="" />
+        </div>
+        <div class="box" data-index="3">
+          <img class="img-box" src="asstes/gift.png" alt="" />
+        </div>
+        <div class="box" data-index="4">
+          <img class="img-box" src="asstes/gift.png" alt="" />
+        </div>
+        <div class="box" data-index="5">
+          <img class="img-box" src="asstes/gift.png" alt="" />
+        </div>
+        <div class="box" data-index="6">
+          <img class="img-box" src="asstes/gift.png" alt="" />
+        </div>
+        <div class="box" data-index="7">
+          <img class="img-box" src="asstes/gift.png" alt="" />
+        </div>
+        <div class="box" data-index="8">
+          <img class="img-box" src="asstes/gift.png" alt="" />
+        </div>
+        <div class="box" data-index="9">
+          <img class="img-box" src="asstes/gift.png" alt="" />
+        </div>
+        <div class="box" data-index="10">
+          <img class="img-box" src="asstes/gift.png" alt="" />
+        </div>
+        <div class="box" data-index="11">
+          <img class="img-box" src="asstes/gift.png" alt="" />
+        </div>
+        <div class="box" data-index="12">
+          <img class="img-box" src="asstes/gift.png" alt="" />
+        </div>
+        <div class="box" data-index="13">
+          <img class="img-box" src="asstes/gift.png" alt="" />
+        </div>
+        <div class="box" data-index="14">
+          <img class="img-box" src="asstes/gift.png" alt="" />
+        </div>
+        <div class="box" data-index="15">
+          <img class="img-box" src="asstes/gift.png" alt="" />
+        </div>
+        <div class="box" data-index="16">
+          <img class="img-box" src="asstes/gift.png" alt="" />
+        </div>
+        <div class="box" data-index="17">
+          <img class="img-box" src="asstes/gift.png" alt="" />
+        </div>
+        <div class="box" data-index="18">
+          <img class="img-box" src="asstes/gift.png" alt="" />
+        </div>
+        <div class="box" data-index="19">
+          <img class="img-box" src="asstes/gift.png" alt="" />
+        </div>
+        <div class="box" data-index="20">
+          <img class="img-box" src="asstes/gift.png" alt="" />
+        </div>
+        <div class="box" data-index="21">
+          <img class="img-box" src="asstes/gift.png" alt="" />
+        </div>
+        <div class="box" data-index="22">
+          <img class="img-box" src="asstes/gift.png" alt="" />
+        </div>
+        <div class="box" data-index="23">
+          <img class="img-box" src="asstes/gift.png" alt="" />
+        </div>
+        <div class="box" data-index="24">
+          <img class="img-box" src="asstes/gift.png" alt="" />
+        </div>
+        <div class="box" data-index="25">
+          <img class="img-box" src="asstes/gift.png" alt="" />
+        </div>
+        <div class="box" data-index="26">
+          <img class="img-box" src="asstes/gift.png" alt="" />
+        </div>
+        <div class="box" data-index="27">
+          <img class="img-box" src="asstes/gift.png" alt="" />
+        </div>
+        <div class="box" data-index="28">
+          <img class="img-box" src="asstes/gift.png" alt="" />
+        </div>
+        <div class="box" data-index="29">
+          <img class="img-box" src="asstes/gift.png" alt="" />
+        </div>
+        <div class="box" data-index="30">
+          <img class="img-box" src="asstes/gift.png" alt="" />
+        </div>
       </div>
-      <div class="box" data-index="3">
-        <img src="asstes/logo.png" alt="logo.png" />
-      </div>
-      <div class="box" data-index="4">
-        <img src="asstes/logo.png" alt="logo.png" />
-      </div>
-      <div class="box" data-index="5">
-        <img src="asstes/logo.png" alt="logo.png" />
-      </div>
-      <div class="box" data-index="6">
-        <img src="asstes/logo.png" alt="logo.png" />
-      </div>
-      <div class="box" data-index="7">
-        <img src="asstes/logo.png" alt="logo.png" />
-      </div>
-      <div class="box" data-index="8">
-        <img src="asstes/logo.png" alt="logo.png" />
-      </div>
-      <div class="box" data-index="9">
-        <img src="asstes/logo.png" alt="logo.png" />
-      </div>
-      <div class="box" data-index="10">
-        <img src="asstes/logo.png" alt="logo.png" />
-      </div>
-      <div class="box" data-index="11">
-        <img src="asstes/logo.png" alt="logo.png" />
-      </div>
-      <div class="box" data-index="12">
-        <img src="asstes/logo.png" alt="logo.png" />
-      </div>
-      <div class="box" data-index="13">
-        <img src="asstes/logo.png" alt="logo.png" />
-      </div>
-      <div class="box" data-index="14">
-        <img src="asstes/logo.png" alt="logo.png" />
-      </div>
-      <div class="box" data-index="15">
-        <img src="asstes/logo.png" alt="logo.png" />
-      </div>
-      <div class="box" data-index="16">
-        <img src="asstes/logo.png" alt="logo.png" />
-      </div>
-      <div class="box" data-index="17">
-        <img src="asstes/logo.png" alt="logo.png" />
-      </div>
-      <div class="box" data-index="18">
-        <img src="asstes/logo.png" alt="logo.png" />
-      </div>
-      <div class="box" data-index="19">
-        <img src="asstes/logo.png" alt="logo.png" />
-      </div>
-      <div class="box" data-index="20">
-        <img src="asstes/logo.png" alt="logo.png" />
-      </div>
-      <div class="box" data-index="21">
-        <img src="asstes/logo.png" alt="logo.png" />
-      </div>
-      <div class="box" data-index="22">
-        <img src="asstes/logo.png" alt="logo.png" />
-      </div>
-      <div class="box" data-index="23">
-        <img src="asstes/logo.png" alt="logo.png" />
-      </div>
-      <div class="box" data-index="24">
-        <img src="asstes/logo.png" alt="logo.png" />
-      </div>
-      <div class="box" data-index="25">
-        <img src="asstes/logo.png" alt="logo.png" />
-      </div>
-      <div class="box" data-index="26">
-        <img src="asstes/logo.png" alt="logo.png" />
-      </div>
-      <div class="box" data-index="27">
-        <img src="asstes/logo.png" alt="logo.png" />
-      </div>
-      <div class="box" data-index="28">
-        <img src="asstes/logo.png" alt="logo.png" />
-      </div>
-      <div class="box" data-index="29">
-        <img src="asstes/logo.png" alt="logo.png" />
-      </div>
-      <div class="box" data-index="30">
-        <img src="asstes/logo.png" alt="logo.png" />
-      </div>
-    </div>
+      <aside class="hidden md:block"></aside>
+    </main>
     <script src="app.js"></script>
   </body>
 </html>
