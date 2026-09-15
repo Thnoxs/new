@@ -6,7 +6,7 @@ const lifeSpan = document.querySelectorAll(".lifeSpan");
 const lifeUpdater = document.getElementById("lifeUpdater");
 const boomConatiner = [];
 let totalLife = 3;
-for (let i = 0; i < boxs.length - 27; i++) {
+for (let i = 0; i < boxs.length - 25; i++) {
   let numberString = Math.floor(1 + Math.random() * boxs.length).toString();
   boomConatiner.push(numberString);
 }
@@ -16,6 +16,7 @@ boxs.forEach((el) => {
     const index = el.getAttribute("data-index");
     if (boomConatiner.includes(index)) {
       totalLife--;
+      lifeSpan[totalLife].classList.add("hidden");
       lifeUpdater.textContent = totalLife;
       if (totalLife > 0) {
         el.classList.add("bom");
@@ -23,6 +24,9 @@ boxs.forEach((el) => {
         img[Number(index - 1)].src = "/asstes/tnt.png";
         loose.play();
       } else {
+        boxs.forEach((n) => {
+          n.style.pointerEvents = "none";
+        });
         img[Number(index - 1)].src = "/asstes/tnt.png";
         clear(boxs, "selected");
         el.classList.add("bom");
