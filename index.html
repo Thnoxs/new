@@ -15,12 +15,22 @@
     />
     <style>
       :root {
-        --glow-bg: rgba(00, 255, 0, 0.495);
+        --glow-bg: rgba(5, 23, 5, 0.495);
       }
       body {
-        background: white;
+        background: black;
+        position: relative;
         overflow: hidden;
-        padding: 0 40px;
+      }
+      #back {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: url(bg.jpeg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        opacity: 0.2;
       }
       nav {
         padding: 10px 50px;
@@ -28,18 +38,22 @@
         display: flex !important;
         justify-content: space-between;
         align-items: center;
+        position: fixed;
+        z-index: 999;
       }
       .lifeSpan {
         width: 20px !important;
         height: 20px;
       }
       main {
+        margin: 60px 10px 0 40px;
         display: flex;
         justify-content: space-between;
       }
       aside {
         width: 300px;
         height: 100%;
+        background: white;
         border-left: 1px solid rgba(0, 0, 0, 0.122);
       }
       .box {
@@ -51,8 +65,9 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background: white;
-        border: 1px solid rgba(0, 0, 0, 0.122);
+        background: rgba(103, 102, 102, 0.028);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.122);
         position: relative;
         transition: 0.3s;
       }
@@ -64,15 +79,13 @@
         /* opacity: 0; */
         top: 10px;
         right: 10px;
-        color: #f1f1f1;
+        color: #c8a6ff;
         width: 25px;
         height: 25px;
         border-radius: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
-        background: #76206a;
-        border: 1px solid rgba(0, 0, 0, 0.122);
       }
       /* .box:hover::before {
         opacity: 1;
@@ -90,12 +103,16 @@
       #box-container {
         padding: 5px;
       }
+      .box:hover {
+        background: hsla(0, 0%, 40%, 0.244) !important;
+        border: 1px dashed #c8a6ff;
+      }
       .selected {
-        background: rgb(190, 255, 190) !important;
-        border: 1px solid darkgreen;
+        /* background: rgb(190, 255, 190) !important; */
+        pointer-events: none;
       }
       .bom {
-        background: rgb(255, 190, 190) !important;
+        /* background: rgb(255, 190, 190) !important; */
       }
       .tag {
         color: #212121;
@@ -103,46 +120,27 @@
         position: absolute;
         font-size: 1.5rem;
       }
-
-      /* .orb-1 {
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        transform: translate(-50%, 20%);
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        background: radial-gradient(var(--glow-bg) 0%, rgba(0, 0, 0, 0.008) 80%);
-        z-index: -1;
-      }
-      .orb-2 {
-        position: absolute;
-        right: 0;
-        top: 0;
-        transform: translate(50%, -20%);
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        background: radial-gradient(var(--glow-bg) 0%, rgba(0, 0, 0, 0.008) 80%);
-        z-index: -1;
-      } */
     </style>
   </head>
-  <body class="w-dvw h-dvh flex pb-5 font-sans select-none flex-col">
-    <!-- <div class="orb-1"></div> -->
-    <!-- <div class="orb-2"></div> -->
-    <nav class="w-full bg-white mb-10">
+  <body class="w-dvw h-dvh flex pb-5 font-sans select-none flex-col relative">
+    <div id="back"></div>
+    <div class="orb-1"></div>
+    <div class="orb-2"></div>
+    <nav class="w-full bg-white">
       <div class="logo">Lorem</div>
       <div class="heart-container flex gap-3 items-center">
         <span id="lifeUpdater">3</span>
         <i class="fa-solid fa-grip-lines-vertical"></i>
-        <img class="lifeSpan" src="asstes/px heart.png" alt="" />
-        <img class="lifeSpan" src="asstes/px heart.png" alt="" />
-        <img class="lifeSpan" src="asstes/px heart.png" alt="" />
+        <img class="lifeSpan 1" src="asstes/px heart.png" alt="" />
+        <img class="lifeSpan 2" src="asstes/px heart.png" alt="" />
+        <img class="lifeSpan 3" src="asstes/px heart.png" alt="" />
       </div>
     </nav>
     <main>
-      <div id="box-container" class="w-full h-full grid grid-cols-6 grid-rows-5 gap-1.5 mr-2">
+      <div
+        id="box-container"
+        class="w-full h-full grid grid-cols-2 sm:grid-cols-3 sm:grid-rows-5 md:grid-cols-4 md:grid-rows-8 lg:grid-cols-6 lg:grid-rows-5 gap-1.5 mr-2"
+      >
         <div class="box" data-index="1">
           <img class="img-box" src="asstes/gift.png" alt="" />
         </div>
@@ -234,7 +232,13 @@
           <img class="img-box" src="asstes/gift.png" alt="" />
         </div>
       </div>
-      <aside class="hidden md:block"></aside>
+      <div
+        id="toggle-sidebar"
+        class="w-3 h-30 bg-[#c8a6ff] fixed bottom-50 left-0 flex justify-center items-center rounded-r-lg cursor-pointer"
+      >
+        <i id="side-btn" class="fa-solid fa-caret-right inline-block text-white"></i>
+      </div>
+      <aside class="hidden xl:block!"></aside>
     </main>
     <script src="app.js"></script>
   </body>
